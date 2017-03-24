@@ -1,0 +1,32 @@
+{
+  "name": "angular_auth_jwt",
+  "version": "1.0.0",
+  "description": "A simplity angular module to authenticate user by jwt (Json Web Token)",
+  "main": "dist/aaj.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FernandoFranco/angular_auth_jwt.git"
+  },
+  "keywords": [
+    "angular",
+    "auth",
+    "jwt"
+  ],
+  "author": "Fernando Franco <atr.franco@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FernandoFranco/angular_auth_jwt/issues"
+  },
+  "homepage": "https://github.com/FernandoFranco/angular_auth_jwt#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-jsmin": "^0.1.5",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.4.1"
+  }
+}

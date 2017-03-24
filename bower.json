@@ -1,0 +1,23 @@
+{
+  "name": "angular_auth_jwt",
+  "version": "1.0.0",
+  "description": "A simplity angular module to authenticate user by jwt (Json Web Token)",
+  "main": "dist/aaj.js",
+  "authors": [
+    "Fernando Franco <atr.franco@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "auth",
+    "jwt"
+  ],
+  "homepage": "https://github.com/FernandoFranco/angular_auth_jwt",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
