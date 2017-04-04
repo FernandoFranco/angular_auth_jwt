@@ -1,6 +1,6 @@
 {
   "name": "angular_auth_jwt",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "A simplity angular module to authenticate user by jwt (Json Web Token)",
   "main": "dist/aaj.js",
   "scripts": {
