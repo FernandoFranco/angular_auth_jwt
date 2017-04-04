@@ -37,52 +37,20 @@
     'use strict';
     angular.module('auth.jwt').config(sharedConfig);
 
-    sharedConfig.$inject = ['$httpProvider', 'jwtOptionsProvider', 'authJwtProvider'];
+    sharedConfig.$inject = ['$inject', '$httpProvider', 'jwtOptionsProvider', 'authJwtProvider'];
 
-    function sharedConfig($httpProvider, jwtOptionsProvider, authJwtProvider) {
-        jwtOptionsProvider.config({
+    function sharedConfig($inject, $httpProvider, jwtOptionsProvider, authJwtProvider) {
+        var config = {
             tokenGetter: authJwtProvider.tokenGetter,
             unauthenticatedRedirector: authJwtProvider.unauthenticatedRedirector
-        });
+        };
+
+        var whiteList = $inject.get('auth.jwt.whiteList');
+        if (whiteList) config.whiteListedDomains = whiteList;
+
+        jwtOptionsProvider.config(config);
 
         $httpProvider.interceptors.push('jwtInterceptor');
-    }
-})(angular);
-/**
- * Fernando Franco
- * Provider Auth
- */
-(function (angular) {
-    'use strict';
-    angular.module('auth.jwt').provider('authJwt', authProvider);
-
-    authProvider.$inject = ['$localStorageProvider'];
-
-    function authProvider($localStorageProvider) {
-        var provider = {};
-
-        return {
-            tokenGetter: _tokenGetterProvider($localStorageProvider),
-            unauthenticatedRedirector: _unauthenticatedRedirector,
-            $get: function () {
-                return provider;
-            }
-        };
-    }
-
-    function _tokenGetterProvider($localStorageProvider) {
-        return function _tokenGetter(options) {
-            if (options && options.url && options.url.substr(options.url.length - 5) === '.html') {
-                return null;
-            }
-            return $localStorageProvider && $localStorageProvider.get('jwt');
-        }
-    }
-
-    _unauthenticatedRedirector.$inject = ['$rootScope'];
-
-    function _unauthenticatedRedirector($rootScope) {
-        $rootScope.$broadcast('auth.jwt.unauthenticated');
     }
 })(angular);
 /**
@@ -159,6 +127,43 @@
         function _singOut() {
             delete $localStorage.jwt;
         }
+    }
+})(angular);
+/**
+ * Fernando Franco
+ * Provider Auth
+ */
+(function (angular) {
+    'use strict';
+    angular.module('auth.jwt').provider('authJwt', authProvider);
+
+    authProvider.$inject = ['$localStorageProvider'];
+
+    function authProvider($localStorageProvider) {
+        var provider = {};
+
+        return {
+            tokenGetter: _tokenGetterProvider($localStorageProvider),
+            unauthenticatedRedirector: _unauthenticatedRedirector,
+            $get: function () {
+                return provider;
+            }
+        };
+    }
+
+    function _tokenGetterProvider($localStorageProvider) {
+        return function _tokenGetter(options) {
+            if (options && options.url && options.url.substr(options.url.length - 5) === '.html') {
+                return null;
+            }
+            return $localStorageProvider && $localStorageProvider.get('jwt');
+        }
+    }
+
+    _unauthenticatedRedirector.$inject = ['$rootScope'];
+
+    function _unauthenticatedRedirector($rootScope) {
+        $rootScope.$broadcast('auth.jwt.unauthenticated');
     }
 })(angular);
 //# sourceMappingURL=aaj.js.map
